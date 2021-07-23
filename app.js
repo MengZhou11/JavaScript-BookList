@@ -38,9 +38,16 @@ function UI(){
     //disappear after 3 sec
     setTimeout(function(){
         document.querySelector('.alert').remove();
-    },3000);
+    },2000);
 
 
+    }
+
+    //delete book
+    UI.prototype.deleteBook= function(target){
+        if(target.className === 'delete'){
+            target.parentElement.parentElement.remove();
+        }
     }
 
 
@@ -52,7 +59,7 @@ function UI(){
     }
 }
 
-//Event Listeners
+//Event Listeners for adding a book
 document.getElementById('book-form').addEventListener('submit', 
 function(e){
     //get form values
@@ -81,4 +88,14 @@ function(e){
 
     e.preventDefault();
     
-})
+});
+
+
+//Event Listener for delete
+document.getElementById('book-list').addEventListener('click', function(e){
+    const ui = new UI();
+    ui.deleteBook(e.target);
+
+    ui.showAlert('Book Removed', 'success');
+    e.preventDefault();
+});
